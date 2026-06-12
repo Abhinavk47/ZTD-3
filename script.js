@@ -113,16 +113,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Add staggered animation delays visually calculated down the list layout
                 card.style.transitionDelay = `${index * 0.1}s`; 
 
+                // Safely extract the valid link structure (checks project.url, project.html_url, or fallback)
+                const finalUrl = project.url || project.html_url || "#";
+
                 card.innerHTML = `
                     <div class="icon">${getIcon(project.language)}</div>
                     <h3>
-                        <a href="${project.url}" target="_blank" style="text-decoration: none; color: inherit; transition: color 0.2s;">
-                            ${project.title}
+                        <a href="${finalUrl}" target="_blank" style="text-decoration: none; color: inherit; transition: color 0.2s;">
+                            ${project.title || project.name}
                         </a>
                     </h3>
-                    <p>${project.description}</p>
+                    <p>${project.description || 'No description available.'}</p>
                     <span style="font-size: 0.8rem; display: inline-block; margin-top: 15px; opacity: 0.75; font-weight: 700; color: var(--primary);">
-                        ● ${project.language}
+                        ● ${project.language || 'Unknown'}
                     </span>
                 `;
                 
@@ -134,23 +137,41 @@ document.addEventListener('DOMContentLoaded', () => {
         if (projectCountSpan) {
             projectCountSpan.textContent = visibleCount;
         }
-    // --- Skill Bars Reveal Animation ---
-const revealElements = document.querySelectorAll('.reveal-element');
+    }
 
-const revealOnScroll = () => {
-    revealElements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        // If the element is visible in the browser window, show it
-        if (elementTop < windowHeight - 50) {
-            element.style.opacity = "1";
-            element.style.transform = "translateY(0)";
-            element.style.transition = "all 0.6s ease-out";
-        }
+    // Fetch dynamic JSON data payload from repository records
+    fetch('projects.json')
+        .then(response => response.json())
+        .then(data => {
+            allProjectsData = data;
+            renderGallery('all'); // Initialize layout engine display setup
+        })
+        .catch(err => console.error("Error initializing project data records registry payload fetch:", err));
+
+    // Handle filter button selections smoothly
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            filterButtons.forEach(button => button.classList.remove('active'));
+            e.target.classList.add('active');
+            renderGallery(e.target.getAttribute('data-filter'));
+        });
     });
-};
 
-// Run it once on load, and whenever the user scrolls
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('DOMContentLoaded', revealOnScroll);
+    // --- Skill Bars Reveal Animation ---
+    const revealOnScroll = () => {
+        const skillsElements = document.querySelectorAll('.reveal-element');
+        skillsElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementTop < windowHeight - 50) {
+                element.style.opacity = "1";
+                element.style.transform = "translateY(0)";
+                element.style.transition = "all 0.6s ease-out";
+            }
+        });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('DOMContentLoaded', revealOnScroll);
+});
