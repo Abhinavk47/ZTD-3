@@ -101,8 +101,24 @@ document.addEventListener('DOMContentLoaded', () => {
         let visibleCount = 0;
 
         allProjectsData.forEach((project, index) => {
-            // Check if user selected 'all' or matches the exact category code tag
-            if (filterValue === 'all' || project.category === filterValue) {
+            // Convert properties safely to strings for matching
+            const projName = (project.title || project.name || "").toLowerCase();
+            const projDesc = (project.description || "").toLowerCase();
+            const projLang = (project.language || "").toLowerCase();
+
+            // Smart dynamic category fallback logic handler
+            let projectCategory = 'web'; // Default category layout block
+            
+            if (projName.includes('figma') || projDesc.includes('figma') || projDesc.includes('ui/ux') || project.category === 'figma') {
+                projectCategory = 'figma';
+            } else if (projLang === 'python' || projLang === 'javascript' || projName.includes('algorithm') || project.category === 'code') {
+                projectCategory = 'code';
+            } else if (project.category) {
+                projectCategory = project.category; // Keep original categorization value if provided
+            }
+
+            // Check if user selected 'all' or matches the dynamically matched layout category tag
+            if (filterValue === 'all' || projectCategory === filterValue) {
                 visibleCount++;
                 
                 // Construct a fresh, responsive CLICKABLE link card wrapper container
@@ -113,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const finalUrl = project.url || project.html_url || "#";
                 card.setAttribute('href', finalUrl);
                 card.setAttribute('target', '_blank');
-                card.setAttribute('data-category', project.category || 'web');
+                card.setAttribute('data-category', projectCategory);
                 
                 // Card-level link styling layout rules
                 card.style.transitionDelay = `${index * 0.1}s`; 
@@ -140,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Live math update strings matching exact requirements specification checklist
+        // Live layout update strings tracking element count metrics
         if (projectCountSpan) {
             projectCountSpan.textContent = visibleCount;
         }
