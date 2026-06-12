@@ -1,0 +1,30 @@
+name: Auto Update Portfolio Projects
+
+on:
+  schedule:
+    # Runs automatically every day at midnight
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows you to trigger it manually anytime
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository Code
+      uses: actions/checkout@v3
+
+    - name: Set Up Python Environment
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Execute Fetch Script
+      run: python fetch_projects.py
+
+    - name: Commit and Push Updated Data
+      run: |
+        git config --global user.name "GitHub Action"
+        git config --global user.email "action@github.com"
+        git add projects.json
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Automated update of projects data records" && git push)
