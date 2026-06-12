@@ -307,11 +307,16 @@ footer {
     overflow: hidden !important;
     pointer-events: none !important;
 }
-/* Force skill bars to show up clearly and remove any animation blur filters */
 .reveal-element {
     opacity: 1 !important;
     transform: none !important;
     visibility: visible !important;
-    filter: none !important; /* This completely removes the blur effect */
+    filter: none !important;
     -webkit-filter: none !important;
+    
+    /* Fix GPU/Sub-pixel rendering blurriness */
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
