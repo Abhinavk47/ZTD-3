@@ -307,9 +307,11 @@ footer {
     overflow: hidden !important;
     pointer-events: none !important;
 }
-/* Force skill bars to show up regardless of javascript triggers */
+/* Force skill bars to show up clearly and remove any animation blur filters */
 .reveal-element {
     opacity: 1 !important;
     transform: none !important;
     visibility: visible !important;
+    filter: none !important; /* This completely removes the blur effect */
+    -webkit-filter: none !important;
 }
