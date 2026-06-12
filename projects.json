@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "title": "ZTD-3",
+        "description": "A wonderful project built during my technical learning journey.",
+        "category": "web",
+        "url": "https://github.com/Abhinavk47/ZTD-3",
+        "language": "JavaScript"
+    }
+]
