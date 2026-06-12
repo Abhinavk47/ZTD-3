@@ -134,3 +134,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (projectCountSpan) {
             projectCountSpan.textContent = visibleCount;
         }
+    // --- Skill Bars Reveal Animation ---
+const revealElements = document.querySelectorAll('.reveal-element');
+
+const revealOnScroll = () => {
+    revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        // If the element is visible in the browser window, show it
+        if (elementTop < windowHeight - 50) {
+            element.style.opacity = "1";
+            element.style.transform = "translateY(0)";
+            element.style.transition = "all 0.6s ease-out";
+        }
+    });
+};
+
+// Run it once on load, and whenever the user scrolls
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('DOMContentLoaded', revealOnScroll);
