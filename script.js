@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 4. STEP-2: DYNAMIC API-DRIVEN GALLERY LOADING ENGINE
+    // 4. DYNAMIC API-DRIVEN GALLERY LOADING ENGINE
     // ==========================================
     const projectGallery = document.getElementById('project-gallery');
     const projectCountSpan = document.getElementById('project-count');
@@ -105,28 +105,35 @@ document.addEventListener('DOMContentLoaded', () => {
             if (filterValue === 'all' || project.category === filterValue) {
                 visibleCount++;
                 
-                // Construct a fresh, responsive card component container
-                const card = document.createElement('article');
-                card.className = `feature-card glass reveal-element active`;
-                card.setAttribute('data-category', project.category);
+                // Construct a fresh, responsive CLICKABLE link card wrapper container
+                const card = document.createElement('a');
+                card.className = `feature-card glass active`;
                 
-                // Add staggered animation delays visually calculated down the list layout
-                card.style.transitionDelay = `${index * 0.1}s`; 
-
-                // Safely extract the valid link structure (checks project.url, project.html_url, or fallback)
+                // Safely extract the valid link structure from JSON schema fallback strings
                 const finalUrl = project.url || project.html_url || "#";
+                card.setAttribute('href', finalUrl);
+                card.setAttribute('target', '_blank');
+                card.setAttribute('data-category', project.category || 'web');
+                
+                // Card-level link styling layout rules
+                card.style.transitionDelay = `${index * 0.1}s`; 
+                card.style.textDecoration = 'none';
+                card.style.color = 'inherit';
+                card.style.display = 'block';
 
+                // Render interior visual tags alongside the dynamic mock button design element
                 card.innerHTML = `
                     <div class="icon">${getIcon(project.language)}</div>
-                    <h3>
-                        <a href="${finalUrl}" target="_blank" style="text-decoration: none; color: inherit; transition: color 0.2s;">
-                            ${project.title || project.name}
-                        </a>
-                    </h3>
-                    <p>${project.description || 'No description available.'}</p>
-                    <span style="font-size: 0.8rem; display: inline-block; margin-top: 15px; opacity: 0.75; font-weight: 700; color: var(--primary);">
-                        ● ${project.language || 'Unknown'}
-                    </span>
+                    <h3 style="margin: 10px 0;">${project.title || project.name}</h3>
+                    <p style="margin-bottom: 15px;">${project.description || 'No description available.'}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="font-size: 0.8rem; opacity: 0.75; font-weight: 700; color: var(--primary);">
+                            ● ${project.language || 'Mixed'}
+                        </span>
+                        <span class="project-btn" style="font-size: 0.85rem; font-weight: 600; padding: 6px 14px; border-radius: 4px; background: var(--primary); color: #fff; transition: background 0.2s;">
+                            View Project →
+                        </span>
+                    </div>
                 `;
                 
                 projectGallery.appendChild(card);
