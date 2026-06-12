@@ -307,3 +307,9 @@ footer {
     overflow: hidden !important;
     pointer-events: none !important;
 }
+/* Force skill bars to show up regardless of javascript triggers */
+.reveal-element {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+}
