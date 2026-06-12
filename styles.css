@@ -1,0 +1,309 @@
+/* ==========================================================================
+   1. COLOR PALETTE VARIABLES (LIGHT THEME DEFAULT & DARK MODE)
+   ========================================================================== */
+:root {
+    --bg: #F4FAFA;
+    --text: #161d1a;
+    --muted: #58656a;
+    --primary: #4af353;
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --border: rgba(0, 0, 0, 0.06);
+    --shadow: 0 12px 30px rgba(69, 229, 106, 0.08);
+}
+
+body.dark-mode {
+    --bg: #0b110f;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 12px 30px rgba(69, 229, 106, 0.02);
+}
+
+/* ==========================================================================
+   2. GLOBAL LAYOUT FRAMEWORK
+   ========================================================================== */
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Structural constraints keeping layouts away from edge borders */
+.hero, 
+.skills-section, 
+.features, 
+.contact-section,
+footer {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+    padding: 80px 0;
+    box-sizing: border-box;
+}
+
+/* Sticky Navigation Layout */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode nav {
+    background: rgba(11, 17, 15, 0.85);
+}
+
+nav a, .logo {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* ==========================================================================
+   3. SECTION SPECIFIC COMPONENT STYLING
+   ========================================================================== */
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 100px 0;
+}
+
+.hero-content { flex: 1; }
+.hero-content h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+}
+.hero-content p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+.hero-image img {
+    width: 100%;
+    max-width: 500px;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+/* Accent Buttons */
+.btn-primary {
+    display: inline-block;
+    background: var(--primary);
+    color: #0b110f !important;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(69, 229, 106, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(69, 229, 106, 0.35);
+}
+
+/* 4-Block Skills Component */
+.skills-wrapper-layout { padding: 0 5%; width: 100%; box-sizing: border-box; }
+.skills-section h2 { font-family: 'Outfit', sans-serif; font-size: 2.5rem; margin: 0 0 10px 0; }
+.section-subtitle { color: var(--muted); margin-bottom: 40px; font-size: 1.1rem; }
+.skills-container { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+.skill-head { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: 700; }
+.blocks-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.block { height: 14px; border-radius: 6px; }
+.block.filled { background: linear-gradient(90deg, #45e55a, #048004); }
+.block.empty { background: #e2f5e4; }
+body.dark-mode .block.empty { background: #1b2e22; }
+
+/* ==========================================================================
+   4. FILTER GALLERY DESIGN (+400 XP FEATURE)
+   ========================================================================== */
+.features h2 { font-family: 'Outfit', sans-serif; font-size: 2.5rem; margin: 0; text-align: center; }
+.filter-container { display: flex; justify-content: center; gap: 12px; margin: 30px 0 10px 0; }
+
+.filter-btn {
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 24px;
+    border-radius: 35px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.filter-btn.active, .filter-btn:hover {
+    background: var(--primary);
+    color: #0b110f;
+    box-shadow: 0 5px 15px rgba(69, 229, 106, 0.3);
+    border-color: var(--primary);
+}
+
+.counter-display { text-align: center; color: var(--muted); margin-bottom: 40px; font-size: 1rem; }
+#project-count { font-weight: bold; color: var(--text); }
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    position: relative;
+}
+.feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    /* Essential smooth scaling transitions for filtering action */
+    transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease, border 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+.feature-card .icon { font-size: 2rem; margin-bottom: 15px; }
+.feature-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; }
+.feature-card p { margin: 0; color: var(--muted); }
+
+/* The Filter Hiding Utility Engine Trigger class */
+.feature-card.hide-card {
+    opacity: 0 !important;
+    transform: scale(0.75) !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+}
+
+/* ==========================================================================
+   5. CENTERED UTILITIES, FOOTER & SYSTEM CONTROLS
+   ========================================================================== */
+.contact-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+}
+.contact-section h2 { font-family: 'Outfit', sans-serif; font-size: 2.5rem; margin: 0 0 10px 0; }
+.contact-section p { color: var(--muted); font-size: 1.1rem; margin: 0 0 30px 0; }
+
+footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+}
+
+/* Back to Top Arrow Styling */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    background-color: var(--primary);
+    color: #0b110f;
+    cursor: pointer;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(69, 229, 106, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+}
+
+/* Scroll Reveal Structural States */
+.reveal-element {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(4px);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal-element.active {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+.delay-1 { transition-delay: 0s; }
+.delay-2 { transition-delay: 0.15s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* Responsive Media Queries for smartphones */
+@media (max-width: 768px) {
+    .hero { flex-direction: column; text-align: center; padding: 60px 0; }
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-image { justify-content: center; }
+    .hero-image img { height: 280px; }
+    .hero-content p { margin: 0 auto 30px auto; }
+    .nav-links { display: none; } /* Keeps it simple on mobile viewports */
+}
+/* ==========================================
+   THE CRITICAL GALLERY FILTERING ENGINE FIX
+   ========================================== */
+.feature-card.hide-card {
+    opacity: 0 !important;
+    transform: scale(0.75) !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+}

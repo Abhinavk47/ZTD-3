@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | Simple Task Manager</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <a href="#home" class="logo">Abhinav Web page</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#features">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+
+    <main>
+        <header class="hero" id="home">
+            <div class="hero-content">
+                <h1>Task Flow</h1>
+                <p>
+                    TaskFlow is a minimal, elegant tool to help you stay
+                    organized, focused, and productive without the clutter.
+                </p>
+                <a href="#features" class="btn-primary">Explore Projects</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://plus.unsplash.com/premium_photo-1661290256778-3b821d52c514?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Organized workspace">
+            </div>
+        </header>
+
+        <div class="skills-wrapper-layout">
+            <section class="skills-section" id="skills">
+                <h2>My Skills</h2>
+                <p class="section-subtitle">The tools and technologies I use to bring ideas to life.</p>
+
+                <div class="skills-container">
+                    
+                    <div class="skill-card reveal-element delay-1">
+                        <div class="skill-head">
+                            <span class="skill-name">HTML</span>
+                            <span class="skill-pct">90%</span>
+                        </div>
+                        <div class="blocks-container">
+                            <div class="block filled"></div>
+                            <div class="block filled"></div>
+                            <div class="block filled"></div>
+                            <div class="block filled"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card reveal-element delay-2">
+                        <div class="skill-head">
+                            <span class="skill-name">CSS</span>
+                            <span class="skill-pct">85%</span>
+                        </div>
+                        <div class="blocks-container">
+                            <div class="block filled"></div>
+                            <div class="block filled"></div>
+                            <div class="block filled"></div>
+                            <div class="block empty"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card reveal-element delay-3">
+                        <div class="skill-head">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-pct">70%</span>
+                        </div>
+                        <div class="blocks-container">
+                            <div class="block filled"></div>
+                            <div class="block filled"></div>
+                            <div class="block filled"></div>
+                            <div class="block empty"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <section class="features" id="features">
+            <h2>My Projects</h2>
+            
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="design">Design</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="code">Code</button>
+            </div>
+
+            <p class="counter-display">Showing <span id="project-count">3</span> project(s)</p>
+
+            <div class="features-grid" id="project-gallery">
+                
+                <article class="feature-card glass reveal-element delay-1" data-category="design">
+                    <div class="icon">💻</div>
+                    <h3>Figma</h3>
+                    <p>A modern task management application built using Figma.</p>
+                </article>
+
+                <article class="feature-card glass reveal-element delay-2" data-category="web">
+                    <div class="icon">📱</div>
+                    <h3>Portfolio</h3>
+                    <p>A personal portfolio website optimized for desktop, tablet, and mobile devices.</p>
+                </article>
+
+                <article class="feature-card glass reveal-element delay-3" data-category="code">
+                    <div class="icon">🚀</div>
+                    <h3>Pulse</h3>
+                    <p>More exciting projects and experiments about Python Bot.</p>
+                </article>
+                
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section reveal-element">
+            <h2>Contact</h2>
+            <p>Feel free to connect with me for projects, collaborations, or opportunities.</p>
+            <a href="mailto:mr.abhinav47123@gmail.com" class="btn-primary">Get In Touch</a>
+            <p>My <a href="https://www.linkedin.com/in/abhinav-krishna-903987312?utm_source=share_via&utm_content=profile&utm_medium=member_android">Linkedin</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ZTD-S-2. Designed for Bootcamp.</p>
+    </footer>
+
+    <button id="backToTop" title="Go to top">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
